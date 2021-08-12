@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ie.marei.calmar</groupId>
-    <artifactId>calmar-ocean-op-python</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <artifactId>s1-l2-ocn-vertical-wind-shear-op-python</artifactId>
+    <version>0.1.0</version>
     <packaging>nbm</packaging>    
     <name>Wind speed profile at turbine hub height</name>
     <description>Wind speed profile at turbine hub height</description>
