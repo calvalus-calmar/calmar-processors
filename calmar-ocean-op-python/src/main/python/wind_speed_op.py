@@ -40,13 +40,13 @@ class WindSpeedOp:
 
         # add new bands to the target product
         # 1) add .._001_owiWindSpeed band
-        wind_parameter_name = owi_parameters_inst.get_owi_wind_speed_name() + "_" + str(self.wind_height)
+        wind_parameter_name = owi_parameters_inst.get_owi_wind_speed_name()
         self.wind_band = wind_speed_product.addBand(wind_parameter_name, snappy.ProductData.TYPE_FLOAT32)
         # self.wind_band.setNoDataValue(Float.NaN)
         self.wind_band.setNoDataValue(owi_parameters_inst.get_no_data())
         self.wind_band.setNoDataValueUsed(True)
         self.wind_band.setUnit("m/s")
-        self.wind_band.setDescription('Wind height adjusted to ' + str(self.wind_height) + ' metres')
+        self.wind_band.setDescription('Wind speed adjusted to ' + str(self.wind_height) + ' metres height above sea level')
 
         # 2) get .._001_owiLat data
         owi_lat = source_product.getRasterDataNode(owi_parameters_inst.get_owi_lat_name())
@@ -86,7 +86,7 @@ class WindSpeedOp:
         # Retrieve the actual data
         samples = tile.getSamplesFloat()
 
-        # Calculate wind speed profile at turbine hub height. Convert the data into numpy data to do the operation
+        # Recalculate wind speed profile at new height. Convert the data into numpy data to do the operation
         shear_coeff = pow(((self.wind_height / 10.0)), self.shear_exponent)
         data = numpy.array(samples, dtype=numpy.float32) * shear_coeff
 

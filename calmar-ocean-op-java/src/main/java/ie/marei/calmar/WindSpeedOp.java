@@ -71,7 +71,7 @@ public class WindSpeedOp extends PixelOperator {
     @Override
     protected void configureTargetSamples(TargetSampleConfigurer sampleConfigurer) throws OperatorException {
         OwiParameters owiParametersInst = getOwiParameters();
-        String windParameterName = owiParametersInst.getOwiWindSpeedName() + "_" + windHeight;
+        String windParameterName = owiParametersInst.getOwiWindSpeedName();
         sampleConfigurer.defineSample(0, windParameterName);
     }
 
@@ -128,13 +128,16 @@ public class WindSpeedOp extends PixelOperator {
         int width = wind.getRasterWidth();
         int height = wind.getRasterHeight();
 
-        String windParameterName = owiParametersInst.getOwiWindSpeedName() + "_" + windHeight;
+        // add new bands to the target product
+        // 1) add .._001_owiWindSpeed band
+        String windParameterName = owiParametersInst.getOwiWindSpeedName();
         final Band windBand = tp.addBand(windParameterName, ProductData.TYPE_FLOAT32);
         windBand.setNoDataValue(no_data);
         windBand.setNoDataValueUsed(true);
         windBand.setUnit("m/s");
+        windBand.setDescription("Wind speed adjusted to " + windHeight + " metres height above sea level");
 
-        // .._001_owiLat
+        // 2) get .._001_owiLat data
         RasterDataNode owiLat = sourceProduct.getRasterDataNode(owiParametersInst.getOwiLatName());
         if (owiLat == null) {
             throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: missing " +
@@ -145,7 +148,7 @@ public class WindSpeedOp extends PixelOperator {
         float[] latData = new float[latImageData.getWidth() * latImageData.getHeight()];
         latData = latImageData.getPixels(0, 0, latImageData.getWidth(), latImageData.getHeight(), latData);
 
-        // .._001_owiLon
+        // 3) get .._001_owiLon data
         RasterDataNode owiLon = sourceProduct.getRasterDataNode(owiParametersInst.getOwiLonName());
         if (owiLon == null) {
             throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: missing " +
@@ -170,7 +173,7 @@ public class WindSpeedOp extends PixelOperator {
         tp.setSceneGeoCoding(pixelGeoCoding);
         */
 
-        //TiePointGrid
+        // Add lat/lon coordinates. Create a TiePointGrid using the lat/lon data from 2) and 3)
         TiePointGrid latGrid = new TiePointGrid("lat", width, height, 0.0, 0.0, 1.0, 1.0, latData);
         TiePointGrid lonGrid = new TiePointGrid("lon", width, height, 0.0, 0.0, 1.0, 1.0, lonData);
         tp.addTiePointGrid(latGrid);
@@ -203,7 +206,7 @@ public class WindSpeedOp extends PixelOperator {
         if (no_data != 0.0 && windPixel == no_data) {
             targetSamples[0].set(no_data);
         } else {
-            //shear 10m to windHeight
+            // Recalculate wind speed profile at new height.
             final double shearCoeff = Math.pow(((windHeight / 10)), shearExponent);
             final double newWindPixel = windPixel * shearCoeff;
             targetSamples[0].set(newWindPixel);
