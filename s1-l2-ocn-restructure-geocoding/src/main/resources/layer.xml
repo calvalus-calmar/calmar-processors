@@ -1,0 +1,39 @@
+<filesystem>
+
+    <folder name="Actions">
+        <folder name="Operators">
+            <file name="ie-marei-calmar-RestructureGeocodingOpAction.instance">
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+                <attr name="delegate" methodvalue="org.esa.snap.core.gpf.ui.DefaultOperatorAction.create"/>
+                <attr name="displayName" stringvalue="Sentinel 1 Level 2 OCN restructure geocoding"/>
+                <attr name="dialogTitle" stringvalue="Sentinel 1 Level 2 OCN restructure geocoding"/>
+                <attr name="operatorName" stringvalue="RestructureGeocodingOp"/>
+                <attr name="targetProductNameSuffix" stringvalue="_restructure-geocoding"/>
+            </file>
+        </folder>
+    </folder>
+
+    <folder name="Menu">
+        <folder name="Radar">
+            <folder name="SAR Applications">
+                <folder name="Ocean Applications">
+                    <file name="ie-marei-calmar-RestructureGeocodingOpAction.shadow">
+                        <attr name="originalFile"
+                              stringvalue="Actions/Operators/ie-marei-calmar-RestructureGeocodingOpAction.instance"/>
+                        <attr name="position"
+                              intvalue="10000"/>
+                    </file>
+                </folder>
+            </folder>
+        </folder>
+    </folder>
+
+    <folder name="Services">
+        <folder name="JavaHelp">Sentinel 1 Level 2 OCN
+            <file name="ie-marei-calmar-s1-l2-ocn-restructure-geocoding-helpset.xml" url="helpset.xml">
+                <attr name="position" intvalue="29900"/>
+            </file>
+        </folder>
+    </folder>
+
+</filesystem>
