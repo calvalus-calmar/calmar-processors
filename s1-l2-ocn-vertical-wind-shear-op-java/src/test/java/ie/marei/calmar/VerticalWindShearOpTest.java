@@ -8,7 +8,7 @@ import org.junit.Test;
 /**
  * @author Norman
  */
-public class WindSpeedOpTest {
+public class VerticalWindShearOpTest {
 
     @Test
     public void testFindBand() throws Exception {

@@ -2,13 +2,15 @@
 
     <folder name="Actions">
         <folder name="Operators">
-            <file name="ie-marei-calmar-WindSpeedOpAction.instance">
+            <file name="ie-marei-calmar-VerticalWindShearOpAction.instance">
                 <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
                 <attr name="delegate" methodvalue="org.esa.snap.core.gpf.ui.DefaultOperatorAction.create"/>
-                <attr name="displayName" stringvalue="Wind speed profile at turbine hub height"/>
-                <attr name="dialogTitle" stringvalue="Wind speed profile at turbine hub height"/>
-                <attr name="operatorName" stringvalue="WindSpeedOp"/>
-                <attr name="targetProductNameSuffix" stringvalue="_windspeedop"/>
+                <attr name="displayName" stringvalue="Sentinel-1 Level-2 OCN Vertical Wind Shear"/>
+                <attr name="dialogTitle" stringvalue="Sentinel-1 Level-2 OCN Vertical Wind Shear"/>
+                <attr name="ShortDescription" stringvalue="Sentinel-1 Level-2 OCN Vertical Wind Shear"/>
+                <attr name="operatorName" stringvalue="OCN-Vertical-Wind-Shear"/>
+                <attr name="targetProductNameSuffix" stringvalue="-vertical-wind-shear"/>
+                <attr name="helpId" stringvalue="VerticalWindShearOpDoc"/>
             </file>
         </folder>
     </folder>
@@ -17,11 +19,10 @@
         <folder name="Radar">
             <folder name="SAR Applications">
                 <folder name="Ocean Applications">
-                    <file name="ie-marei-calmar-WindSpeedOpAction.shadow">
+                    <file name="ie-marei-calmar-VerticalWindShearOpAction.shadow">
                         <attr name="originalFile"
-                              stringvalue="Actions/Operators/ie-marei-calmar-WindSpeedOpAction.instance"/>
-                        <attr name="position"
-                              intvalue="10000"/>
+                              stringvalue="Actions/Operators/ie-marei-calmar-VerticalWindShearOpAction.instance"/>
+                        <attr name="position" intvalue="10000"/>
                     </file>
                 </folder>
             </folder>
@@ -30,7 +31,7 @@
 
     <folder name="Services">
         <folder name="JavaHelp">
-            <file name="ie-marei-calmar-s1-l2-ocn-vertical-wind-shear-op-java-helpset.xml" url="helpset.xml">
+            <file name="ie-marei-calmar-vertical-wind-shear-op-java-helpset.xml" url="helpset.xml">
                 <attr name="position" intvalue="29900"/>
             </file>
         </folder>

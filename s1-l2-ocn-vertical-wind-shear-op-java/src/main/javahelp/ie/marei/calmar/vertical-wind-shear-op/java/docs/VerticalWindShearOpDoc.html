@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Wind speed profile at turbine hub height</title>
+    <title>Sentinel-1 Level-2 OCN Vertical Wind Shear</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -8,22 +8,23 @@
 <body>
 <table class="header">
     <tr class="header">
-        <td class="header">Wind speed profile at turbine hub height</td>
+        <td class="header">Sentinel-1 Level-2 OCN Vertical Wind Shear</td>
         <td class="header" align="right"><img src="images/snap_header.jpg" border=0></td>
     </tr>
 </table>
 
 <br>
-<p>This tool calculates the wind speed profile at turbine hub height.</p>
+<p>This tool recalculates wind speed on Sentinel-1 Level-2 OCN products for a given height above sea level.</p>
 
 <h3>I/O Parameters</h3>
-<p>This tool requires a Sentinel 1 Level 2 OCN source product.</p>
+<p>This tool requires a Sentinel-1 Level-2 OCN source product.</p>
 
 <h3>Processing Parameters</h3>
 <p>
     <b>Wind Height</b>
     <br>
-    This parameter specifies the turbine hub height. The wind speed profile is calculated for this height.
+    This parameter specifies height above sea level. The wind speed profile is calculated for this height.
+    A value of 100.0 metres above sea level is used as the default value.
 </p>
 
 <p>
@@ -36,6 +37,8 @@
     <li>Unstable air above flat open coast: 0.11</li>
     <li>Neutral air above flat open coast: 0.16</li>
 </ul>
+    A value of 0.1 (neutral air) is used as the default value.
+
 </p>
 
 </body>

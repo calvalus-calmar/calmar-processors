@@ -37,7 +37,7 @@ public class OwiParameters {
             }
         }
         if (wind == null) {
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product");
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product");
         }
         this.noData = wind.getGeophysicalNoDataValue();
         this.windBand = wind;

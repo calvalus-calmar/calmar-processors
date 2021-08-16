@@ -7,9 +7,9 @@
     <groupId>ie.marei.calmar</groupId>
     <artifactId>s1-l2-ocn-vertical-wind-shear-op-java</artifactId>
     <version>0.1.0</version>
-    <packaging>nbm</packaging>    
-    <name>Wind speed profile at turbine hub height</name>
-    <description>Wind speed profile at turbine hub height</description>
+    <packaging>nbm</packaging>
+    <name>Sentinel-1 Level-2 OCN Vertical Wind Shear</name>
+    <description>Recalculates wind speed on Sentinel-1 Level-2 OCN products for a given height above sea level</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

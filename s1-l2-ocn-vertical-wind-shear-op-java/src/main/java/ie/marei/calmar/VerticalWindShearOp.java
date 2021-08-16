@@ -13,20 +13,19 @@ import org.esa.snap.core.gpf.pointop.*;
 import java.awt.image.Raster;
 
 /**
- * The <code>WindSpeedOp</code> adjusts wind speed to height on Sentinel 1 Level 2 OCN products.
+ * The <code>OCN-Vertical-Wind-Shear</code> recalculates wind speed on Sentinel-1 Level-2 OCN products for a given height above sea level.
  *
  * @author Declan Dunne
  */
 @OperatorMetadata(
-        alias = "WindSpeedOp",
+        alias = "OCN-Vertical-Wind-Shear",
         version = "0.1",
         category = "Radar/SAR Applications/Ocean Applications",
-        description = "This example uses SNAP Java API.\n" +
-                "It demonstrates the development of a a Java processor plug-in\n" +
-                "which adjusts wind speed to a new height for Sentinel 1 Level 2 OCN products.\n",
+        description = "The OCN-Vertical-Wind-Shear operator recalculates wind speed on\n" +
+                      "Sentinel-1 Level-2 OCN products for a given height above sea level.",
         authors = "Declan Dunne, Louis de Montera",
-        copyright = "Copyright (C) 2019 MaREI")
-public class WindSpeedOp extends PixelOperator {
+        copyright = "Copyright (C) 2021 MaREI")
+public class VerticalWindShearOp extends PixelOperator {
 
     @SourceProduct(alias = "Name", description = "The source product")
     private Product sourceProduct;
@@ -34,7 +33,7 @@ public class WindSpeedOp extends PixelOperator {
     @TargetProduct
     private Product targetProduct;
 
-    @Parameter(defaultValue = "100.0", description = "Altitude of the turbine hub height")
+    @Parameter(defaultValue = "100.0", description = "Height above sea level")
     private double windHeight;
 
     @Parameter(defaultValue = "0.1", description = "Shear exponent")
@@ -140,7 +139,7 @@ public class WindSpeedOp extends PixelOperator {
         // 2) get .._001_owiLat data
         RasterDataNode owiLat = sourceProduct.getRasterDataNode(owiParametersInst.getOwiLatName());
         if (owiLat == null) {
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: missing " +
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: missing " +
                     owiParametersInst.getOwiLatName() + " band");
         }
         MultiLevelImage owiLatImage = owiLat.getGeophysicalImage();
@@ -151,7 +150,7 @@ public class WindSpeedOp extends PixelOperator {
         // 3) get .._001_owiLon data
         RasterDataNode owiLon = sourceProduct.getRasterDataNode(owiParametersInst.getOwiLonName());
         if (owiLon == null) {
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: missing " +
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: missing " +
                     owiParametersInst.getOwiLonName() + " band");
         }
         MultiLevelImage owiLonImage = owiLon.getGeophysicalImage();
@@ -236,7 +235,7 @@ public class WindSpeedOp extends PixelOperator {
 
     public static class Spi extends OperatorSpi {
         public Spi() {
-            super(WindSpeedOp.class);
+            super(VerticalWindShearOp.class);
         }
     }
 }

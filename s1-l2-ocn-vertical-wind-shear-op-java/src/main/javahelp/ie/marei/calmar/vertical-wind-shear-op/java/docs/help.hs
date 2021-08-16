@@ -4,7 +4,7 @@
         "http://java.sun.com/products/javahelp/helpset_2_0.dtd">
 
 <helpset version="2.0">
-    <title>Wind speed profile at turbine hub height</title>
+    <title>Sentinel-1 Level-2 OCN Vertical Wind Shear</title>
     <maps>
         <homeID>top</homeID>
         <mapref location="map.jhm"/>
