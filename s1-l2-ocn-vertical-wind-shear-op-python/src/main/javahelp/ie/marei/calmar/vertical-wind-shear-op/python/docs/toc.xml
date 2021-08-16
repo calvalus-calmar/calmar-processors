@@ -11,7 +11,7 @@
         <tocitem text="Radar">
             <tocitem text="SAR Applications">
                 <tocitem text="Ocean Tools">
-                    <tocitem text="Wind speed profile at turbine hub height" target="WindSpeedOpPyDoc"/>
+                    <tocitem text="Sentinel-1 Level-2 OCN Vertical Wind Shear" target="VerticalWindShearOp"/>
                 </tocitem>
             </tocitem>
         </tocitem>

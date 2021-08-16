@@ -2,16 +2,15 @@
 
     <folder name="Actions">
         <folder name="Operators">
-            <file name="PyWindSpeedOpAction.instance">
-                <attr name="instanceCreate"
-                      methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+            <file name="PyVerticalWindShearOpAction.instance">
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
                 <attr name="delegate" methodvalue="org.esa.snap.core.gpf.ui.DefaultOperatorAction.create"/>
-                <attr name="operatorName" stringvalue="wind_speed_op"/>
-                <attr name="displayName" stringvalue="Wind speed profile at turbine hub height"/>
-                <attr name="dialogTitle" stringvalue="Wind speed profile at turbine hub height"/>
-                <attr name="helpId" stringvalue="WindSpeedOpPyDoc"/>
-                <attr name="targetProductNameSuffix" stringvalue="_windspeedop"/>
-                <attr name="ShortDescription" stringvalue="This plugin adjusts wind speed over ground for S1 L2 OCN."/>
+                <attr name="displayName" stringvalue="Sentinel-1 Level-2 OCN Vertical Wind Shear"/>
+                <attr name="dialogTitle" stringvalue="Sentinel-1 Level-2 OCN Vertical Wind Shear"/>
+                <attr name="ShortDescription" stringvalue="Sentinel-1 Level-2 OCN Vertical Wind Shear"/>
+                <attr name="operatorName" stringvalue="vertical_wind_shear_op"/>
+                <attr name="targetProductNameSuffix" stringvalue="-vertical-wind-shear"/>
+                <attr name="helpId" stringvalue="VerticalWindShearOpDoc"/>
             </file>
         </folder>
     </folder>
@@ -20,9 +19,9 @@
         <folder name="Radar">
             <folder name="SAR Applications">
                 <folder name="Ocean Applications">
-                    <file name="PyWindSpeedOpAction.shadow">
+                    <file name="PyVerticalWindShearOpAction.shadow">
                         <attr name="originalFile"
-                              stringvalue="Actions/Operators/PyWindSpeedOpAction.instance"/>
+                              stringvalue="Actions/Operators/PyVerticalWindShearOpAction.instance"/>
                         <attr name="position" intvalue="10000"/>
                     </file>
                 </folder>
@@ -32,7 +31,7 @@
 
     <folder name="Services">
         <folder name="JavaHelp">
-            <file name="helpset.xml" url="helpset.xml">
+            <file name="ie-marei-calmar-vertical-wind-shear-op-python-helpset.xml" url="helpset.xml">
                 <attr name="position" intvalue="29900"/>
             </file>
         </folder>

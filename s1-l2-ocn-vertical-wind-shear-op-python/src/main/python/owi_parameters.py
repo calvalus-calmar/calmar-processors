@@ -27,7 +27,7 @@ class OwiParameters:
                 wind = check_band
                 break
         if wind is None:
-            raise RuntimeError("Requires a Sentinel 1 Level 2 OCN source product")
+            raise RuntimeError("Requires a Sentinel-1 Level-2 OCN source product")
         self._no_data = wind.getGeophysicalNoDataValue()
         self._wind_band = wind
 

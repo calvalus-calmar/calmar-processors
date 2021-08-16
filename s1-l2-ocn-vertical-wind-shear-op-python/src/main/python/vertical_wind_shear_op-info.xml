@@ -4,20 +4,19 @@
 -->
 <operator>
     <!-- The name uniquely identifies the operator within SNAP -->
-    <name>org.esa.snap.python.WindSpeedOp</name>
+    <name>vertical_wind_shear_op.VerticalWindShearOp</name>
     <!-- The alias is a more user-friendly name, e.g. to be used on the command line -->
-    <alias>wind_speed_op</alias>
+    <alias>vertical_wind_shear_op</alias>
     <!-- The operatorClass must always be org.esa.snap.gpf.python.PyOperator -->
     <operatorClass>org.esa.snap.python.gpf.PyOperator</operatorClass>
 
     <version>1.0</version>
     <authors>Declan Dunne, Louis de Montera</authors>
-    <copyright>Copyright (C) 2019 MaREI</copyright>
+    <copyright>Copyright (C) 2021 MaREI</copyright>
 
     <description>
-        This example uses SNAP Python API.
-        It demonstrates the development of a a Python processor plug-in
-        which adjusts wind speed to a new height for Sentinel 1 Level 2 OCN products.
+        The OCN-Vertical-Wind-Shear operator recalculates wind speed on
+        Sentinel-1 Level-2 OCN products for a given height above sea level.
     </description>
 
     <namedSourceProducts>
@@ -36,7 +35,7 @@
             <!-- The name of the parameter; use context.getParameter('windHeight') in your Python code to retrieve the value -->
             <name>windHeight</name>
             <!-- The description is shown in the help on the command line and also as tooltip in the GUI -->
-            <description>Altitude of the turbine hub height</description>
+            <description>Height above sea level</description>
             <!-- The type of the parameter; can be boolean, byte, short, int, long, float, double, java.lang.String -->
             <dataType>double</dataType>
             <!-- The default value of the parameter; this is used if no value is specified by the user -->

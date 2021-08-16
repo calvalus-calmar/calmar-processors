@@ -7,7 +7,7 @@ from snappy import FlagCoding, TiePointGrid, TiePointGeoCoding, RasterDataNode
 
 #Float = jpy.get_type('java.lang.Float')
 
-class WindSpeedOp:
+class VerticalWindShearOp:
     def __init__(self):
         self.wind_height = None
         self.shear_exponent = None
@@ -18,19 +18,19 @@ class WindSpeedOp:
         source_product = context.getSourceProduct()
         if source_product is None:
             raise RuntimeError("Source product is missing")
-        print('wind_speed_op initialize: source product location is', source_product.getFileLocation())
+        print('vertical_wind_shear_op initialize: source product location is', source_product.getFileLocation())
 
-        # Retrieve parameters defined in wind_speed_op-info.xml
+        # Retrieve parameters defined in vertical_wind_shear_op-info.xml
         self.wind_height = context.getParameter('windHeight')
         self.shear_exponent = context.getParameter('shearExponent')
-        print('initialize wind_speed_op: wind_height =', self.wind_height, ', shear_exponent =', self.shear_exponent)
+        print('initialize vertical_wind_shear_op: wind_height =', self.wind_height, ', shear_exponent =', self.shear_exponent)
 
         width = source_product.getSceneRasterWidth()
         height = source_product.getSceneRasterHeight()
-        print('initialize wind_speed_op: width =', width, ', height =', height)
+        print('initialize vertical_wind_shear_op: width =', width, ', height =', height)
 
         # Create the target product
-        wind_speed_product = snappy.Product(context.getId(), 'wind_speed_op', width, height)
+        wind_speed_product = snappy.Product(context.getId(), 'vertical_wind_shear_op', width, height)
 
         # copy metadata from source product to the new product
         snappy.ProductUtils.copyMetadata(source_product, wind_speed_product)
@@ -51,7 +51,7 @@ class WindSpeedOp:
         # 2) get .._001_owiLat data
         owi_lat = source_product.getRasterDataNode(owi_parameters_inst.get_owi_lat_name())
         if owi_lat is None:
-            raise RuntimeError("Requires a Sentinel 1 Level 2 OCN source product: missing " +
+            raise RuntimeError("Requires a Sentinel-1 Level-2 OCN source product: missing " +
                                owi_parameters_inst.get_owi_lat_name() + " band")
         owi_lat_image = owi_lat.getGeophysicalImage()
         lat_image_data = owi_lat_image.getData()
@@ -61,7 +61,7 @@ class WindSpeedOp:
         # 3) get .._001_owiLon data
         owi_lon = source_product.getRasterDataNode(owi_parameters_inst.get_owi_lon_name())
         if owi_lon is None:
-            raise RuntimeError("Requires a Sentinel 1 Level 2 OCN source product: missing " +
+            raise RuntimeError("Requires a Sentinel-1 Level-2 OCN source product: missing " +
                                owi_parameters_inst.get_owi_lon_name() + " band")
         owi_lon_image = owi_lon.getGeophysicalImage()
         lon_image_data = owi_lon_image.getData()
