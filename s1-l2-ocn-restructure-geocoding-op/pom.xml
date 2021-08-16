@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ie.marei.calmar</groupId>
-    <artifactId>s1-l2-ocn-restructure-geocoding</artifactId>
+    <artifactId>s1-l2-ocn-restructure-geocoding-op</artifactId>
     <version>0.1.0</version>
     <packaging>nbm</packaging>    
-    <name>S1 L2 OCN restructure geocoding</name>
-    <description>Restructures Sentinel 1 Level 2 OCN datasets with correct crs geocoding</description>
+    <name>Sentinel-1 Level-2 OCN Restructure Geocoding</name>
+    <description>Restructures Sentinel-1 Level-2 OCN datasets with correct crs geocoding</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

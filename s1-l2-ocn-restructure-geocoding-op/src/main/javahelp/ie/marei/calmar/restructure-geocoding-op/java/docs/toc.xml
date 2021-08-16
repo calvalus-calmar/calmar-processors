@@ -11,7 +11,7 @@
         <tocitem text="Radar">
             <tocitem text="SAR Applications">
                 <tocitem text="Ocean Tools">
-                    <tocitem text="Calmar Ocean Wind Energy Preprocess" target="WindSpeedOp"/>
+                    <tocitem text="Sentinel-1 Level-2 OCN Restructure Geocoding" target="RestructureGeocodingOp"/>
                 </tocitem>
             </tocitem>
         </tocitem>

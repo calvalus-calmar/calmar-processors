@@ -13,15 +13,15 @@ import org.esa.snap.core.gpf.pointop.*;
 import java.awt.image.Raster;
 
 /**
- * The <code>RestructureGeocodingOp</code> restructures Sentinel 1 Level 2 OCN datasets with a correct crs geocoding.
+ * The <code>RestructureGeocodingOp</code> restructures Sentinel-1 Level-2 OCN datasets with a correct crs geocoding.
  *
  * @author Declan Dunne
  */
 @OperatorMetadata(
-        alias = "Restructure-OCN-Geocoding",
+        alias = "OCN-Restructure-Geocoding",
         version = "0.1",
         category = "Radar/SAR Applications/Ocean Applications",
-        description = "This tool restructures Sentinel 1 Level 2 OCN datasets with a correct crs geocoding",
+        description = "This tool restructures Sentinel-1 Level-2 OCN datasets with a correct crs geocoding",
         authors = "Declan Dunne",
         copyright = "Copyright (C) 2021 MaREI")
 public class RestructureGeocodingOp extends PixelOperator {
@@ -165,7 +165,7 @@ public class RestructureGeocodingOp extends PixelOperator {
         // .._001_owiLat
         RasterDataNode owiLat = sourceProduct.getRasterDataNode(owiParametersInst.getOwiLatName());
         if (owiLat == null) {
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: missing " +
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: missing " +
                     owiParametersInst.getOwiLatName() + " band");
         }
         MultiLevelImage owiLatImage = owiLat.getGeophysicalImage();
@@ -176,7 +176,7 @@ public class RestructureGeocodingOp extends PixelOperator {
         // .._001_owiLon
         RasterDataNode owiLon = sourceProduct.getRasterDataNode(owiParametersInst.getOwiLonName());
         if (owiLon == null) {
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: missing " +
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: missing " +
                     owiParametersInst.getOwiLonName() + " band");
         }
         MultiLevelImage owiLonImage = owiLon.getGeophysicalImage();

@@ -38,7 +38,7 @@ public class OwiParameters {
         }
 
         if (nameIndex == -1) {
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: owiLat not found");
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiLat not found");
         }
 
         String[] parameters = this.possibleOwiParameterNames[nameIndex];
@@ -50,25 +50,25 @@ public class OwiParameters {
         if (sourceProduct.getBand(parameters[1]) != null)
             this.owiLonName = parameters[1];
         else
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: owiLon not found");
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiLon not found");
 
         // owiWindSpeed
         if (sourceProduct.getBand(parameters[2]) != null)
             this.owiWindSpeedName = parameters[2];
         else
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: owiWindSpeed not found");
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiWindSpeed not found");
 
         // owiWindDirection
         if (sourceProduct.getBand(parameters[3]) != null)
             this.owiWindDirectionName = parameters[3];
         else
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: owiWindDirection not found");
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiWindDirection not found");
 
         // owiWindQuality
         if (sourceProduct.getBand(parameters[4]) != null)
             this.owiWindQualityName = parameters[4];
         else
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: owiWindQuality not found");
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiWindQuality not found");
 
         // owiLandFlag
         if (sourceProduct.getBand(parameters[5]) != null)
@@ -76,13 +76,13 @@ public class OwiParameters {
         else if (sourceProduct.getBand(parameters[6]) != null)
             this.owiLandFlagName = parameters[6];
         else
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: owiLandFlag or owiMask not found");
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiLandFlag or owiMask not found");
 
         // owiIncidenceAngle
         if (sourceProduct.getBand(parameters[7]) != null)
             this.owiIncidenceAngleName = parameters[7];
         else
-            throw new OperatorException("Requires a Sentinel 1 Level 2 OCN source product: owiIncidenceAngle not found");
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiIncidenceAngle not found");
     }
 
     // lat

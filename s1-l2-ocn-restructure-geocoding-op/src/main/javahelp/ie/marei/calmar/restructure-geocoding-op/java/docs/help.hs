@@ -4,7 +4,7 @@
         "http://java.sun.com/products/javahelp/helpset_2_0.dtd">
 
 <helpset version="2.0">
-    <title>Calmar Ocean Wind Energy Preprocess</title>
+    <title>Sentinel-1 Level-2 OCN Restructure Geocoding</title>
     <maps>
         <homeID>top</homeID>
         <mapref location="map.jhm"/>

@@ -5,10 +5,12 @@
             <file name="ie-marei-calmar-RestructureGeocodingOpAction.instance">
                 <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
                 <attr name="delegate" methodvalue="org.esa.snap.core.gpf.ui.DefaultOperatorAction.create"/>
-                <attr name="displayName" stringvalue="Sentinel 1 Level 2 OCN restructure geocoding"/>
-                <attr name="dialogTitle" stringvalue="Sentinel 1 Level 2 OCN restructure geocoding"/>
-                <attr name="operatorName" stringvalue="RestructureGeocodingOp"/>
-                <attr name="targetProductNameSuffix" stringvalue="_restructure-geocoding"/>
+                <attr name="displayName" stringvalue="Sentinel-1 Level-2 OCN Restructure Geocoding"/>
+                <attr name="dialogTitle" stringvalue="Sentinel-1 Level-2 OCN Restructure Geocoding"/>
+                <attr name="ShortDescription" stringvalue="Sentinel-1 Level-2 OCN Restructure Geocoding"/>
+                <attr name="operatorName" stringvalue="OCN-Restructure-Geocoding"/>
+                <attr name="targetProductNameSuffix" stringvalue="-restructure-geocoding"/>
+                <attr name="helpId" stringvalue="RestructureGeocodingOpDoc"/>
             </file>
         </folder>
     </folder>
@@ -20,8 +22,7 @@
                     <file name="ie-marei-calmar-RestructureGeocodingOpAction.shadow">
                         <attr name="originalFile"
                               stringvalue="Actions/Operators/ie-marei-calmar-RestructureGeocodingOpAction.instance"/>
-                        <attr name="position"
-                              intvalue="10000"/>
+                        <attr name="position" intvalue="10000"/>
                     </file>
                 </folder>
             </folder>
@@ -29,8 +30,8 @@
     </folder>
 
     <folder name="Services">
-        <folder name="JavaHelp">Sentinel 1 Level 2 OCN
-            <file name="ie-marei-calmar-s1-l2-ocn-restructure-geocoding-helpset.xml" url="helpset.xml">
+        <folder name="JavaHelp">
+            <file name="ie-marei-calmar-restructure-geocoding-op-helpset.xml" url="helpset.xml">
                 <attr name="position" intvalue="29900"/>
             </file>
         </folder>
