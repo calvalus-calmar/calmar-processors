@@ -5,32 +5,40 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ie.marei.calmar</groupId>
-    <artifactId>s1-l2-ocn-vertical-wind-shear-op-python</artifactId>
+    <artifactId>s1-sar-ocn-restructure-geocoding-op</artifactId>
     <version>0.1.0</version>
-    <packaging>nbm</packaging>
-    <name>Sentinel-1 Level-2 OCN Vertical Wind Shear</name>
-    <description>Recalculates wind speed on Sentinel-1 Level-2 OCN products for a given height above sea level</description>
+    <packaging>nbm</packaging>    
+    <name>Sentinel-1 SAR Level-2 OCN Restructure</name>
+    <description>Restructures Sentinel-1 SAR Level-2 OCN datasets including correct crs geocoding</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <snap.version>8.0.3</snap.version>
+        <javahelp.version>2.0.05</javahelp.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.esa.snap</groupId>
-            <artifactId>snap-rcp</artifactId>
-            <version>${snap.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.esa.snap</groupId>
-            <artifactId>snap-python</artifactId>
-            <version>${snap.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.esa.snap</groupId>
             <artifactId>snap-core</artifactId>
             <version>${snap.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.esa.snap</groupId>
+            <artifactId>snap-gpf</artifactId>
+            <version>${snap.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.esa.snap</groupId>
+            <artifactId>ceres-glayer</artifactId>
+            <version>${snap.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -67,14 +75,6 @@
     </pluginRepositories>
 
     <build>
-        <resources>
-            <resource>
-                <directory>${basedir}/src/main/python</directory>
-            </resource>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -85,16 +85,16 @@
                     <dependency>
                         <groupId>javax.help</groupId>
                         <artifactId>javahelp</artifactId>
-                        <version>2.0.05</version>
+                        <version>${javahelp.version}</version>
                     </dependency>
                 </dependencies>
                 <configuration>
                     <licenseName>GPL 3</licenseName>
                     <licenseFile>LICENSE.txt</licenseFile>
-                    <requiresRestart>true</requiresRestart>
+                    <requiresRestart>false</requiresRestart>
                 </configuration>
             </plugin>
-			<plugin>
+            <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.2</version>
                 <configuration>
