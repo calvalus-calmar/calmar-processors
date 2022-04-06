@@ -10,9 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>s1-l2-ocn-restructure-geocoding-op</module>
-        <module>s1-l2-ocn-vertical-wind-shear-op-java</module>
-        <module>s1-l2-ocn-vertical-wind-shear-op-python</module>
+        <module>s1-sar-ocn-restructure-geocoding-op</module>
+        <module>s1-sar-ocn-vertical-wind-shear-op-java</module>
+        <module>s1-sar-ocn-vertical-wind-shear-op-python</module>
     </modules>
 
     <repositories>
