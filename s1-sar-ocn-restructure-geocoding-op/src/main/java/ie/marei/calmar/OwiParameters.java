@@ -7,8 +7,8 @@ import org.esa.snap.core.gpf.OperatorException;
 public class OwiParameters {
 
     private final String[][] possibleOwiParameterNames = {
-            {"vv_001_owiLat", "vv_001_owiLon", "vv_001_owiWindSpeed", "vv_001_owiWindDirection", "vv_001_owiWindQuality", "vv_001_owiLandFlag", "vv_001_owiMask", "vv_001_owiIncidenceAngle"},
-            {"hh_001_owiLat", "hh_001_owiLon", "hh_001_owiWindSpeed", "hh_001_owiWindDirection", "hh_001_owiWindQuality", "hh_001_owiLandFlag", "hh_001_owiMask", "hh_001_owiIncidenceAngle"}
+            {"vv_001_owiLat", "vv_001_owiLon", "vv_001_owiWindSpeed", "vv_001_owiWindDirection", "vv_001_owiWindQuality",  "vv_001_owiInversionQuality", "vv_001_owiLandFlag", "vv_001_owiMask", "vv_001_owiIncidenceAngle"},
+            {"hh_001_owiLat", "hh_001_owiLon", "hh_001_owiWindSpeed", "hh_001_owiWindDirection", "hh_001_owiWindQuality",  "hh_001_owiInversionQuality", "hh_001_owiLandFlag", "hh_001_owiMask", "hh_001_owiIncidenceAngle"}
     };
 
     private Product sourceProduct;
@@ -18,7 +18,8 @@ public class OwiParameters {
     private String owiWindDirectionName = "";
     private String owiIncidenceAngleName = "";
     private String owiWindQualityName = "";
-    private String owiLandFlagName = "";
+    private String owiInversionQualityName = "";
+    private String owiMaskName = "";
 
     public OwiParameters(Product sourceProduct) {
 
@@ -70,17 +71,23 @@ public class OwiParameters {
         else
             throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiWindQuality not found");
 
-        // owiLandFlag
+        // owiInversionQuality
         if (sourceProduct.getBand(parameters[5]) != null)
-            this.owiLandFlagName = parameters[5];
-        else if (sourceProduct.getBand(parameters[6]) != null)
-            this.owiLandFlagName = parameters[6];
+            this.owiInversionQualityName = parameters[5];
+        else
+            throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiInversionQuality not found");
+
+        // owiMask
+        if (sourceProduct.getBand(parameters[6]) != null)
+            this.owiMaskName = parameters[6];
+        else if (sourceProduct.getBand(parameters[7]) != null)
+            this.owiMaskName = parameters[7];
         else
             throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiLandFlag or owiMask not found");
 
         // owiIncidenceAngle
-        if (sourceProduct.getBand(parameters[7]) != null)
-            this.owiIncidenceAngleName = parameters[7];
+        if (sourceProduct.getBand(parameters[8]) != null)
+            this.owiIncidenceAngleName = parameters[8];
         else
             throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: owiIncidenceAngle not found");
     }
@@ -130,13 +137,22 @@ public class OwiParameters {
         return this.sourceProduct.getBand(this.owiWindQualityName);
     }
 
-    // owiLandFlag
-    public String getOwiLandFlagName() {
-        return this.owiLandFlagName;
+    // owiInversionQuality
+    public String getOwiInversionQualityName() {
+        return this.owiInversionQualityName;
     }
 
-    public Band getOwiLandFlagBand() {
-        return this.sourceProduct.getBand(this.owiLandFlagName);
+    public Band getOwiInversionQualityBand() {
+        return this.sourceProduct.getBand(this.owiInversionQualityName);
+    }
+
+    // owiLandFlag
+    public String getOwiMaskName() {
+        return this.owiMaskName;
+    }
+
+    public Band getMaskNameBand() {
+        return this.sourceProduct.getBand(this.owiMaskName);
     }
 
     // owiIncidenceAngle
