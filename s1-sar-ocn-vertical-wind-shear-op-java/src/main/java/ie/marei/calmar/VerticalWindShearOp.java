@@ -53,9 +53,14 @@ public class VerticalWindShearOp extends PixelOperator {
     @Override
     protected void configureSourceSamples(SourceSampleConfigurer sampleConfigurer) throws OperatorException {
         OwiParameters owiParametersInst = getOwiParameters();
-        sampleConfigurer.defineSample(0, owiParametersInst.getOwiWindSpeedName());
-        sampleConfigurer.defineSample(1, owiParametersInst.getOwiLatName());
-        sampleConfigurer.defineSample(2, owiParametersInst.getOwiLonName());
+        sampleConfigurer.defineSample(0, owiParametersInst.getOwiLatName());
+        sampleConfigurer.defineSample(1, owiParametersInst.getOwiLonName());
+        sampleConfigurer.defineSample(2, owiParametersInst.getOwiWindSpeedName());
+        sampleConfigurer.defineSample(3, owiParametersInst.getOwiWindDirectionName());
+        sampleConfigurer.defineSample(4, owiParametersInst.getOwiWindQualityName());
+        sampleConfigurer.defineSample(5, owiParametersInst.getOwiInversionQualityName());
+        sampleConfigurer.defineSample(6, owiParametersInst.getOwiIncidenceAngleName());
+        sampleConfigurer.defineSample(7, owiParametersInst.getOwiMaskName());
     }
 
     /**
@@ -70,8 +75,21 @@ public class VerticalWindShearOp extends PixelOperator {
     @Override
     protected void configureTargetSamples(TargetSampleConfigurer sampleConfigurer) throws OperatorException {
         OwiParameters owiParametersInst = getOwiParameters();
-        String windParameterName = owiParametersInst.getOwiWindSpeedName();
-        sampleConfigurer.defineSample(0, windParameterName);
+
+        String owiWindSpeedName = owiParametersInst.getOwiWindSpeedName();
+        sampleConfigurer.defineSample(0, owiWindSpeedName);
+
+        String owiWindDirectionName = owiParametersInst.getOwiWindDirectionName();
+        sampleConfigurer.defineSample(1, owiWindDirectionName);
+
+        String owiWindQualityName = owiParametersInst.getOwiWindQualityName();
+        sampleConfigurer.defineSample(2, owiWindQualityName);
+
+        String owiInversionQualityName = owiParametersInst.getOwiInversionQualityName();
+        sampleConfigurer.defineSample(3, owiInversionQualityName);
+
+        String owiIncidenceAngleName = owiParametersInst.getOwiIncidenceAngleName();
+        sampleConfigurer.defineSample(4, owiIncidenceAngleName);
     }
 
     /**
@@ -122,21 +140,43 @@ public class VerticalWindShearOp extends PixelOperator {
         */
 
         OwiParameters owiParametersInst = getOwiParameters();
-        double no_data = owiParametersInst.getNoData();
-        Band wind = owiParametersInst.getWindBand();
-        int width = wind.getRasterWidth();
-        int height = wind.getRasterHeight();
 
-        // add new bands to the target product
-        // 1) add .._001_owiWindSpeed band
-        String windParameterName = owiParametersInst.getOwiWindSpeedName();
-        final Band windBand = tp.addBand(windParameterName, ProductData.TYPE_FLOAT32);
-        windBand.setNoDataValue(no_data);
-        windBand.setNoDataValueUsed(true);
-        windBand.setUnit("m/s");
-        windBand.setDescription("Wind speed adjusted to " + windHeight + " metres height above sea level");
+        // owiWindSpeed
+        Band owiWindSpeedInput = owiParametersInst.getOwiWindSpeedBand();
+        String owiWindSpeedName = owiParametersInst.getOwiWindSpeedName();
+        final Band owiWindSpeedOutput = tp.addBand(owiWindSpeedName, ProductData.TYPE_FLOAT32);
+        owiWindSpeedOutput.setNoDataValue(-999.0);
+        owiWindSpeedOutput.setNoDataValueUsed(true);
+        owiWindSpeedOutput.setUnit("m/s");
+        owiWindSpeedOutput.setDescription("Wind speed adjusted to " + windHeight + " metres height above sea level");
 
-        // 2) get .._001_owiLat data
+        // owiWindDirection
+        String owiWindDirectionName = owiParametersInst.getOwiWindDirectionName();
+        final Band owiWindDirectionOutput = tp.addBand(owiWindDirectionName, ProductData.TYPE_FLOAT32);
+        owiWindDirectionOutput.setNoDataValue(-999.0);
+        owiWindDirectionOutput.setNoDataValueUsed(true);
+        owiWindDirectionOutput.setUnit("degrees");
+
+        // owiWindQuality
+        String owiWindQualityName = owiParametersInst.getOwiWindQualityName();
+        final Band owiWindQualityOutput = tp.addBand(owiWindQualityName, ProductData.TYPE_UINT8);
+        owiWindQualityOutput.setNoDataValue(255);
+        owiWindQualityOutput.setNoDataValueUsed(true);
+
+        // owiInversionQualityName
+        String owiInversionQualityName = owiParametersInst.getOwiInversionQualityName();
+        final Band owiInversionQualityOutput = tp.addBand(owiInversionQualityName, ProductData.TYPE_UINT8);
+        owiInversionQualityOutput.setNoDataValue(255);
+        owiInversionQualityOutput.setNoDataValueUsed(true);
+
+        // owiIncidenceAngle
+        String owiIncidenceAngleName = owiParametersInst.getOwiIncidenceAngleName();
+        final Band owiIncidenceAngleOutput = tp.addBand(owiIncidenceAngleName, ProductData.TYPE_FLOAT32);
+        owiIncidenceAngleOutput.setNoDataValue(-999.0);
+        owiIncidenceAngleOutput.setNoDataValueUsed(true);
+        owiIncidenceAngleOutput.setUnit("degrees");
+
+        // owiLat
         RasterDataNode owiLat = sourceProduct.getRasterDataNode(owiParametersInst.getOwiLatName());
         if (owiLat == null) {
             throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: missing " +
@@ -147,7 +187,7 @@ public class VerticalWindShearOp extends PixelOperator {
         float[] latData = new float[latImageData.getWidth() * latImageData.getHeight()];
         latData = latImageData.getPixels(0, 0, latImageData.getWidth(), latImageData.getHeight(), latData);
 
-        // 3) get .._001_owiLon data
+        // owiLon
         RasterDataNode owiLon = sourceProduct.getRasterDataNode(owiParametersInst.getOwiLonName());
         if (owiLon == null) {
             throw new OperatorException("Requires a Sentinel-1 Level-2 OCN source product: missing " +
@@ -172,7 +212,10 @@ public class VerticalWindShearOp extends PixelOperator {
         tp.setSceneGeoCoding(pixelGeoCoding);
         */
 
-        // Add lat/lon coordinates. Create a TiePointGrid using the lat/lon data from 2) and 3)
+        //TiePointGrid
+        int width = owiWindSpeedInput.getRasterWidth();
+        int height = owiWindSpeedInput.getRasterHeight();
+
         TiePointGrid latGrid = new TiePointGrid("lat", width, height, 0.0, 0.0, 1.0, 1.0, latData);
         TiePointGrid lonGrid = new TiePointGrid("lon", width, height, 0.0, 0.0, 1.0, 1.0, lonData);
         tp.addTiePointGrid(latGrid);
@@ -199,20 +242,55 @@ public class VerticalWindShearOp extends PixelOperator {
     @Override
     protected void computePixel(int x, int y, Sample[] sourceSamples, WritableSample[] targetSamples) {
         OwiParameters owiParametersInst = getOwiParameters();
-        double no_data = owiParametersInst.getNoData();
 
-        double windPixel = sourceSamples[0].getDouble();
-        if (no_data != 0.0 && windPixel == no_data) {
-            targetSamples[0].set(no_data);
+        // get mask flag pixel
+        double owiMaskPixel = sourceSamples[7].getDouble();
+
+        // get wind quality, and assign no data based on mask flag
+        int owiWindQualityPixel = sourceSamples[4].getInt();
+        if (owiMaskPixel != 0.0) {
+            targetSamples[2].set(255);
+        } else {
+            targetSamples[2].set(owiWindQualityPixel);
+        }
+
+        // get inversion quality, and assign no data based on mask flag
+        int owiInversionQualityPixel = sourceSamples[5].getInt();
+        if (owiMaskPixel != 0.0) {
+            targetSamples[3].set(255);
+        } else {
+            targetSamples[3].set(owiInversionQualityPixel);
+        }
+
+        // get incidence angle, and assign no data based on mask flag
+        int owiIncidenceAnglePixel = sourceSamples[6].getInt();
+        if (owiMaskPixel != 0.0) {
+            targetSamples[4].set(255);
+        } else {
+            targetSamples[4].set(owiIncidenceAnglePixel);
+        }
+
+        // get wind speed, and assign no data based on mask flag
+        double owiWindSpeedPixel = sourceSamples[2].getDouble();
+        if (owiMaskPixel != 0.0) {
+            targetSamples[0].set(-999.0);
         } else {
             // Recalculate wind speed profile at new height.
             final double shearCoeff = Math.pow(((windHeight / 10)), shearExponent);
-            final double newWindPixel = windPixel * shearCoeff;
+            final double newWindPixel = owiWindSpeedPixel * shearCoeff;
             targetSamples[0].set(newWindPixel);
             try {
             } catch (Exception exception) {
                 throw new OperatorException(exception.getMessage());
             }
+        }
+
+        // get wind direction, and assign no data based on mask flag
+        double owiWindDirectionPixel = sourceSamples[3].getDouble();
+        if (owiMaskPixel != 0.0) {
+            targetSamples[1].set(-999.0);
+        } else {
+            targetSamples[1].set(owiWindDirectionPixel);
         }
     }
 
